@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "to.agentcentral/amazon-seller-central",
+  "title": "Agent Central",
+  "description": "Hosted MCP server for Amazon sellers using Claude, ChatGPT, and other AI clients.",
+  "version": "1.0.0",
+  "websiteUrl": "https://agentcentral.to/amazon-seller-central-mcp-claude",
+  "repository": {
+    "url": "https://github.com/christi4nity/agent-central-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://hosted-server-1039762986179.us-central1.run.app/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Bearer Agent Central API key, for example: Bearer ac_live_<YOUR_API_KEY>",
+          "isRequired": true,
+          "isSecret": true,
+          "placeholder": "Bearer ac_live_<YOUR_API_KEY>"
+        }
+      ]
+    }
+  ]
+}
