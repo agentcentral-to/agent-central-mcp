@@ -1,0 +1,30 @@
+{
+  "name": "agentcentral-mcp",
+  "version": "1.0.1",
+  "description": "Agent Central is a hosted Amazon Seller Central MCP server. This package is a stdio introspection stub; the 87 production tools are available through the remote streamable-HTTP endpoint at https://mcp.agentcentral.to/mcp.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "agentcentral-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', '755')\"",
+    "start": "node dist/index.js",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.5.0"
+  },
+  "homepage": "https://agentcentral.to",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentcentral-to/agent-central-mcp"
+  }
+}

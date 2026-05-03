@@ -4,6 +4,8 @@ agentcentral is a hosted MCP server for Amazon sellers using Claude, ChatGPT, an
 
 It connects AI clients to Amazon Ads, Seller Central, inventory, orders, catalog, rankings, finance, and fulfillment data through a remote Streamable HTTP MCP endpoint.
 
+> This repository contains the registry metadata (`server.json`, `glama.json`) and a thin stdio introspection stub (`src/index.ts`, `Dockerfile`). The 87 production tools are only callable through the hosted endpoint at `https://mcp.agentcentral.to/mcp`. The stdio package is published so MCP directories and clients can introspect the tool catalog without an account.
+
 ## Endpoint
 
 ```json
@@ -53,3 +55,20 @@ Full setup guide: https://agentcentral.to/amazon-seller-central-mcp-claude
 - "Compare TACOS, ad spend, and sales by ASIN this month."
 - "Find suppressed listings and show the source-provided suppression reasons."
 - "Show inventory, sales velocity, and inbound shipment status for my top SKUs."
+
+## Local stdio stub (introspection only)
+
+This repo ships a minimal stdio MCP server so directories like Glama and Smithery can introspect the tool catalog without signing up. It does not execute tool calls — every call returns a pointer to the hosted endpoint. Run it locally with:
+
+```
+docker build -t agentcentral-mcp .
+docker run --rm -i agentcentral-mcp
+```
+
+Or via Node:
+
+```
+npm install
+npm run build
+node dist/index.js
+```
