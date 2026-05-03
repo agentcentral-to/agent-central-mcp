@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build stdio stub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Type-check + build
+        run: npm run build
+
+      - name: Smoke test stdio MCP introspection
+        run: |
+          ( echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}'
+            sleep 0.3
+            echo '{"jsonrpc":"2.0","method":"notifications/initialized","params":{}}'
+            sleep 0.1
+            echo '{"jsonrpc":"2.0","id":2,"method":"tools/list","params":{}}'
+            sleep 0.5
+          ) | node dist/index.js > /tmp/out.txt 2>&1
+          grep -q '"name":"agentcentral"' /tmp/out.txt
+          grep -q '"name":"agentcentral_setup"' /tmp/out.txt
