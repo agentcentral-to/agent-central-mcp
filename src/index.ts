@@ -12,7 +12,7 @@ const SETUP_URL = "https://agentcentral.to/amazon-seller-central-mcp-claude"
 const VERSION = "1.0.1"
 
 const HOSTED_NOTICE =
-  `agentcentral exposes 87 production tools across Amazon Ads, Seller Central, ` +
+  `agentcentral exposes 97 tools across Amazon Ads, Seller Central, ` +
   `inventory, orders, catalog, ranking, finance, and fulfillment. They are only ` +
   `available through the remote streamable-HTTP MCP endpoint at ${HOSTED_URL}.\n\n` +
   `This stdio package is an introspection stub. To connect Claude, ChatGPT, ` +

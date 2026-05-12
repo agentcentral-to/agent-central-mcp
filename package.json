@@ -1,7 +1,7 @@
 {
   "name": "agentcentral-mcp",
   "version": "1.0.1",
-  "description": "Agent Central is a hosted Amazon Seller Central MCP server. This package is a stdio introspection stub; the 87 production tools are available through the remote streamable-HTTP endpoint at https://mcp.agentcentral.to/mcp.",
+  "description": "agentcentral is a hosted Amazon Seller Central MCP server and Amazon Ads MCP server for Claude, ChatGPT, and other MCP clients. This package is a stdio introspection stub; the 97 tools expose Amazon seller data through the remote streamable-HTTP endpoint at https://mcp.agentcentral.to/mcp.",
   "license": "MIT",
   "type": "module",
   "bin": {
