@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "to.agentcentral/amazon-seller-central",
   "title": "agentcentral",
-  "description": "Hosted Amazon Seller Central MCP server and Amazon Ads MCP server for Claude, ChatGPT, and other AI clients, with an Amazon seller data layer for inventory, orders, catalog, finance, and fulfillment.",
-  "version": "1.0.2",
+  "description": "agentcentral is a hosted Amazon MCP server, Amazon Seller Central MCP server, and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, OpenClaw, and other HTTP-capable MCP clients. It exposes 141 domain-scoped tools and 148 hosted production tools total for fast Amazon seller reads plus safe guarded writes.",
+  "version": "1.0.3",
   "websiteUrl": "https://agentcentral.to/amazon-seller-central-mcp",
   "repository": {
     "id": "1223010147",
