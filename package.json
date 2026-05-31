@@ -1,7 +1,7 @@
 {
   "name": "agentcentral-mcp",
   "version": "1.0.3",
-  "description": "agentcentral is a hosted Amazon MCP server, Amazon Seller Central MCP server, and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, OpenClaw, and HTTP-capable MCP clients. This package is a stdio introspection stub for the 148-tool hosted Streamable HTTP endpoint at https://mcp.agentcentral.to/mcp.",
+  "description": "agentcentral is a hosted Amazon MCP server, Amazon Seller Central MCP server, and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, OpenClaw, and HTTP-capable MCP clients. This package is a stdio introspection stub for the 145-tool hosted Streamable HTTP endpoint at https://mcp.agentcentral.to/mcp.",
   "license": "MIT",
   "type": "module",
   "bin": {

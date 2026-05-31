@@ -4,7 +4,7 @@ agentcentral is a hosted Amazon MCP server for Amazon sellers: an Amazon Seller 
 
 It connects AI clients to Amazon Ads, Seller Central, inventory, orders, catalog, rankings, finance, and fulfillment data through the hosted Streamable HTTP endpoint at `https://mcp.agentcentral.to/mcp`.
 
-This is not just an export layer. agentcentral is an operational MCP server with fast factual reads plus safe guarded writes: scoped API keys, read/write tool separation, previews, guardrails, and audited write results. The hosted endpoint currently exposes 141 domain-scoped tools and 148 production tools total. This public repo contains registry metadata and a thin stdio introspection stub; live tool execution happens only through the hosted endpoint.
+This is not just an export layer. agentcentral is an operational MCP server with fast factual reads plus safe guarded writes: scoped API keys, read/write tool separation, previews, guardrails, and audited write results. The hosted endpoint currently exposes 141 domain-scoped tools and 145 production tools total. This public repo contains registry metadata and a thin stdio introspection stub; live tool execution happens only through the hosted endpoint.
 
 ## Connect
 

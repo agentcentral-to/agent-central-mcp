@@ -11,7 +11,7 @@ const HOSTED_URL = "https://mcp.agentcentral.to/mcp"
 const SETUP_URL = "https://agentcentral.to/amazon-seller-central-mcp-claude"
 const VERSION = "1.0.3"
 const DOMAIN_SCOPED_TOOL_COUNT = 141
-const UTILITY_TOOL_COUNT = 7
+const UTILITY_TOOL_COUNT = 4
 const HOSTED_TOOL_COUNT = DOMAIN_SCOPED_TOOL_COUNT + UTILITY_TOOL_COUNT
 
 const HOSTED_NOTICE =
@@ -1031,18 +1031,6 @@ const utilityTools: readonly UtilityTool[] = [
   {
     "name": "get_account_data_tour",
     "description": "Return a first-run account data tour with trust preflight, business pulse, spotlight products, neutral cross-domain signals, and evidence handles"
-  },
-  {
-    "name": "create_shareable_report",
-    "description": "Create a secret-link public snapshot report after the user explicitly asks to publish or share one"
-  },
-  {
-    "name": "update_shareable_report",
-    "description": "Replace an existing public snapshot report at the same URL after the user explicitly asks for an update"
-  },
-  {
-    "name": "delete_shareable_report",
-    "description": "Revoke an existing public snapshot report link after the user explicitly asks to take it down"
   },
   {
     "name": "submit_conversation_feedback",
