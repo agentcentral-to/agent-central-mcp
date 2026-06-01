@@ -1,7 +1,8 @@
 {
   "name": "agentcentral-mcp",
   "version": "1.0.3",
-  "description": "agentcentral is a hosted Amazon MCP server, Amazon Seller Central MCP server, and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, OpenClaw, and HTTP-capable MCP clients. This package is a stdio introspection stub for the 145-tool hosted Streamable HTTP endpoint at https://mcp.agentcentral.to/mcp.",
+  "private": true,
+  "description": "agentcentral is a hosted Amazon MCP server, Amazon Seller Central MCP server, and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, OpenClaw, and HTTP-capable MCP clients. This repository ships a local stdio introspection stub for the 145-tool hosted Streamable HTTP endpoint at https://mcp.agentcentral.to/mcp.",
   "license": "MIT",
   "type": "module",
   "bin": {
@@ -13,7 +14,8 @@
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', '755')\"",
     "start": "node dist/index.js",
-    "prepare": "npm run build"
+    "check:metadata": "node scripts/check-metadata.mjs",
+    "ci": "npm run check:metadata && npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0"
@@ -26,5 +28,24 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/agentcentral-to/agent-central-mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/agentcentral-to/agent-central-mcp/issues"
+  },
+  "keywords": [
+    "agentcentral",
+    "amazon-mcp",
+    "amazon-seller-central-mcp",
+    "amazon-ads-mcp",
+    "model-context-protocol",
+    "remote-mcp",
+    "streamable-http",
+    "claude",
+    "chatgpt",
+    "cursor"
+  ],
+  "author": "agentcentral",
+  "engines": {
+    "node": ">=22"
   }
 }

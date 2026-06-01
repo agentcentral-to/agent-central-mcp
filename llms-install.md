@@ -1,6 +1,6 @@
 # agentcentral MCP install notes for AI agents
 
-agentcentral is a hosted remote MCP server for Amazon sellers. Do not try to run this repository as the production service. This repo is a public registry/schema facade and a local stdio introspection stub.
+agentcentral is a hosted remote MCP server for Amazon sellers. Do not try to run this repository as the production service. This repo is a public registry/schema facade and a local stdio introspection stub. It is not the production service and is not published as an npm package.
 
 ## Preferred setup: hosted remote MCP
 
@@ -32,7 +32,7 @@ Setup guide: https://agentcentral.to/amazon-seller-central-mcp-claude
 
 ## Local setup: introspection only
 
-The local server in this repo is only for directory and client introspection. It lists the public tool catalog but does not execute live Amazon data tools. Tool calls return a pointer to the hosted endpoint and setup guide.
+The local server in this repo is only for directory and client introspection. It lists the hosted public tool catalog plus one setup helper, but does not execute live Amazon data tools. Tool calls return a pointer to the hosted endpoint and setup guide.
 
 ```bash
 npm install

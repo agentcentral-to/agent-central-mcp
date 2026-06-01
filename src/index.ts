@@ -10,20 +10,6 @@ import {
 const HOSTED_URL = "https://mcp.agentcentral.to/mcp"
 const SETUP_URL = "https://agentcentral.to/amazon-seller-central-mcp-claude"
 const VERSION = "1.0.3"
-const DOMAIN_SCOPED_TOOL_COUNT = 141
-const UTILITY_TOOL_COUNT = 4
-const HOSTED_TOOL_COUNT = DOMAIN_SCOPED_TOOL_COUNT + UTILITY_TOOL_COUNT
-
-const HOSTED_NOTICE =
-  `agentcentral exposes ${DOMAIN_SCOPED_TOOL_COUNT} domain-scoped Amazon MCP tools and ` +
-  `${HOSTED_TOOL_COUNT} hosted production tools total across Amazon Ads, Seller Central, ` +
-  `inventory, orders, catalog, ranking, finance, and fulfillment. The hosted server ` +
-  `supports fast factual reads plus safe guarded writes with previews, guardrails, ` +
-  `and audit logs. It is only callable through the remote Streamable HTTP MCP endpoint at ${HOSTED_URL}.\n\n` +
-  `This stdio package is an introspection stub. To connect Claude, ChatGPT, Cursor, ` +
-  `Claude Code, OpenClaw, or another HTTP-capable MCP client to the live server, ` +
-  `follow the setup guide at ${SETUP_URL}.`
-
 type CatalogTool = {
   readonly name: string
   readonly description: string
@@ -957,7 +943,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_catalog_cleanup",
-    "description": "Listings with quality issues to fix",
+    "description": "Listings with catalog quality issues and source fields",
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": false
@@ -1038,13 +1024,29 @@ const utilityTools: readonly UtilityTool[] = [
   },
   {
     "name": "get_account_info",
-    "description": "Return the marketplace scope, connection status, tool availability, and next-step guidance for the active API key"
+    "description": "Return the marketplace scope, connection status, and tool availability for the active API key"
   },
   {
     "name": "get_action_history",
     "description": "Return tenant-wide write audit history when the active API key has action-history read permission"
   }
 ] as const
+
+const DOMAIN_SCOPED_TOOL_COUNT = domainTools.length
+const UTILITY_TOOL_COUNT = utilityTools.length
+const HOSTED_TOOL_COUNT = DOMAIN_SCOPED_TOOL_COUNT + UTILITY_TOOL_COUNT
+const LOCAL_STUB_TOOL_COUNT = HOSTED_TOOL_COUNT + 1
+
+const HOSTED_NOTICE =
+  `agentcentral exposes ${DOMAIN_SCOPED_TOOL_COUNT} domain-scoped Amazon MCP tools and ` +
+  `${HOSTED_TOOL_COUNT} hosted production tools total across Amazon Ads, Seller Central, ` +
+  `inventory, orders, catalog, ranking, finance, and fulfillment. The hosted server ` +
+  `supports fast factual reads plus safe guarded writes with previews, guardrails, ` +
+  `and audit logs. It is only callable through the remote Streamable HTTP MCP endpoint at ${HOSTED_URL}.\n\n` +
+  `This stdio server lists ${LOCAL_STUB_TOOL_COUNT} local discovery tools: the hosted catalog ` +
+  `plus the agentcentral_setup helper. It is an introspection stub. To connect Claude, ` +
+  `ChatGPT, Cursor, Claude Code, OpenClaw, or another HTTP-capable MCP client to the live server, ` +
+  `follow the setup guide at ${SETUP_URL}.`
 
 const directApiToolNames = new Set<string>([
   "get_dsp_advertisers_live",
@@ -1212,7 +1214,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
           text:
             `Hosted MCP endpoint:\n  ${HOSTED_URL}\n\n` +
             `Setup guide:\n  ${SETUP_URL}\n\n` +
-            `Hosted catalog:\n  ${DOMAIN_SCOPED_TOOL_COUNT} domain-scoped tools / ${HOSTED_TOOL_COUNT} production tools total.\n\n` +
+            `Hosted catalog:\n  ${DOMAIN_SCOPED_TOOL_COUNT} domain-scoped tools / ${HOSTED_TOOL_COUNT} production tools total.\n` +
+            `Local stub catalog:\n  ${LOCAL_STUB_TOOL_COUNT} discovery tools, including agentcentral_setup.\n\n` +
             `Add this to your client config:\n` +
             `{\n  "mcpServers": {\n    "agentcentral": {\n      "url": "${HOSTED_URL}",\n      "headers": { "Authorization": "Bearer ac_live_<YOUR_API_KEY>" }\n    }\n  }\n}`,
         },

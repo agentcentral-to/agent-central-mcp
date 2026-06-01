@@ -4,7 +4,7 @@ agentcentral is a hosted Amazon MCP server for Amazon sellers: an Amazon Seller 
 
 It connects AI clients to Amazon Ads, Seller Central, inventory, orders, catalog, rankings, finance, and fulfillment data through the hosted Streamable HTTP endpoint at `https://mcp.agentcentral.to/mcp`.
 
-This is not just an export layer. agentcentral is an operational MCP server with fast factual reads plus safe guarded writes: scoped API keys, read/write tool separation, previews, guardrails, and audited write results. The hosted endpoint currently exposes 141 domain-scoped tools and 145 production tools total. This public repo contains registry metadata and a thin stdio introspection stub; live tool execution happens only through the hosted endpoint.
+This is not just an export layer. agentcentral is an operational MCP server with fast factual reads plus safe guarded writes: scoped API keys, read/write tool separation, previews, guardrails, and audited write results. The hosted endpoint currently exposes 141 domain-scoped tools and 145 production tools total. This public repo contains registry metadata and a thin stdio introspection stub; live tool execution happens only through the hosted endpoint. The local stub lists the hosted catalog plus one setup helper for discovery, so it is intentionally one tool larger than the hosted production catalog.
 
 ## Connect
 
@@ -74,6 +74,8 @@ agentcentral returns factual seller data, source fields, deterministic metrics, 
 
 This repo ships a minimal stdio MCP server so directories and clients can introspect the public tool catalog without an agentcentral account. It does not execute tool calls. Every call returns a pointer to the hosted endpoint and setup guide.
 
+The stub is not published to npm. Clone this repository or use the Docker example below if a directory/client needs local stdio introspection; for real usage, configure the hosted remote MCP endpoint above.
+
 ```bash
 docker build -t agentcentral-mcp .
 docker run --rm -i agentcentral-mcp
@@ -86,7 +88,3 @@ npm install
 npm run build
 node dist/index.js
 ```
-
-## Suggested GitHub topics
-
-`amazon-mcp`, `amazon-seller-mcp`, `amazon-seller-central-mcp`, `amazon-ads-mcp`, `sp-api`, `sp-api-mcp`, `amazon-ads-api`, `model-context-protocol`, `remote-mcp`, `streamable-http`, `claude`, `chatgpt`, `cursor`
