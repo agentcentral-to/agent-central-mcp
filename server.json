@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "to.agentcentral/amazon-seller-central",
-  "title": "agentcentral",
+  "title": "Agent Central",
   "description": "Hosted Amazon Seller Central and Amazon Ads MCP server for Claude, ChatGPT, Cursor, and agents.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "websiteUrl": "https://agentcentral.to/amazon-seller-central-mcp",
   "repository": {
     "id": "1223010147",
@@ -17,7 +17,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "description": "Bearer agentcentral API key, for example: Bearer ac_live_<YOUR_API_KEY>",
+          "description": "Bearer Agent Central API key, for example: Bearer ac_live_<YOUR_API_KEY>",
           "isRequired": true,
           "isSecret": true,
           "placeholder": "Bearer ac_live_<YOUR_API_KEY>"

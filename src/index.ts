@@ -9,7 +9,7 @@ import {
 
 const HOSTED_URL = "https://mcp.agentcentral.to/mcp"
 const SETUP_URL = "https://agentcentral.to/amazon-seller-central-mcp-claude"
-const VERSION = "1.0.3"
+const VERSION = "1.0.4"
 type CatalogTool = {
   readonly name: string
   readonly description: string
@@ -34,6 +34,13 @@ const domainTools: readonly CatalogTool[] = [
   {
     "name": "get_campaign_snapshots",
     "description": "Campaign setting history and change detection",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
+    "name": "get_ads_change_history",
+    "description": "Timestamped Amazon Ads entity change events",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -68,7 +75,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_search_terms",
-    "description": "Customer search terms that triggered ads",
+    "description": "SP/SB customer search terms that triggered ads",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -123,6 +130,13 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "get_advertising_invoices",
+    "description": "Amazon Advertising invoice and billing data, including line-item transaction detail",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
     "name": "get_store_performance",
     "description": "Brand Store traffic, page, source, tag, and sales insights",
     "domain": "Ads",
@@ -153,6 +167,34 @@ const domainTools: readonly CatalogTool[] = [
   {
     "name": "get_search_query_performance",
     "description": "Market share and conversion data",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
+    "name": "get_repeat_purchase_behavior",
+    "description": "Brand Analytics repeat-purchase behavior by ASIN",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
+    "name": "get_search_catalog_performance",
+    "description": "Brand Analytics weekly ASIN funnel facts",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
+    "name": "get_market_basket",
+    "description": "Brand Analytics weekly ASIN pair facts",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
+    "name": "get_brand_search_terms",
+    "description": "Bounded Brand Analytics term ranks and clicked-product shares",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -355,7 +397,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "update_campaign_bidding",
-    "description": "Preview or adjust placement bid modifiers",
+    "description": "Preview or adjust dynamic strategy and placement bid modifiers",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": true
@@ -363,6 +405,13 @@ const domainTools: readonly CatalogTool[] = [
   {
     "name": "update_campaign_budget",
     "description": "Preview or change daily campaign budget",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "update_campaign_off_amazon_settings",
+    "description": "Preview or set exact Sponsored Products Off-Amazon settings",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": true
@@ -628,7 +677,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_budget_pacing",
-    "description": "Daily campaign budget usage and pacing snapshots",
+    "description": "SP, SB, and SD budget usage and pacing snapshots",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -669,6 +718,20 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "get_promotion_performance",
+    "description": "Coupon clips, redemptions, and budget, plus Best Deal and Lightning Deal performance with Amazon-reported status",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
+    "name": "get_keyword_ranks",
+    "description": "Keyword rank positions, changes, and SQP volume views",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
     "name": "get_fba_inventory",
     "description": "FBA stock levels and quantities",
     "domain": "Inventory",
@@ -677,7 +740,14 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_inventory_health",
-    "description": "Age buckets, weeks of cover, storage fees",
+    "description": "Age buckets, weeks of cover, storage fee exposure",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
+    "name": "get_fba_storage_fees",
+    "description": "FBA monthly and long-term storage fee rows with billed size/weight fields",
     "domain": "Inventory",
     "serverDomain": "inventory",
     "write": false
@@ -733,7 +803,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_sales_velocity",
-    "description": "Daily sales and traffic time series",
+    "description": "Net units by ASIN/period plus sales and traffic fields",
     "domain": "Inventory",
     "serverDomain": "inventory",
     "write": false
@@ -741,6 +811,13 @@ const domainTools: readonly CatalogTool[] = [
   {
     "name": "get_listing_registry",
     "description": "Active listing registry, search, and brand ASIN views",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
+    "name": "get_listing_offers",
+    "description": "Seller's own regular and scheduled sale price per SKU/ASIN plus per-listing last-modified date",
     "domain": "Inventory",
     "serverDomain": "inventory",
     "write": false
@@ -781,6 +858,13 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "get_order_items",
+    "description": "Bulk line items across orders with date/status/ASIN filters",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
     "name": "get_returns",
     "description": "FBA return records",
     "domain": "Inventory",
@@ -796,7 +880,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_seasonality_index",
-    "description": "52-week demand curve with events",
+    "description": "Unlabeled 52-week ISO-week demand curve",
     "domain": "Inventory",
     "serverDomain": "inventory",
     "write": false
@@ -844,8 +928,8 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
-    "name": "get_replenishment_offers",
-    "description": "Live and historical Subscribe and Save replenishment offer status",
+    "name": "get_subscribe_and_save",
+    "description": "Subscribe & Save offer status, history, and Amazon-provided metrics",
     "domain": "Inventory",
     "serverDomain": "inventory",
     "write": false
@@ -865,8 +949,36 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "create_report",
+    "description": "Create a generic non-restricted Seller Central report",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": true
+  },
+  {
+    "name": "get_report",
+    "description": "Processing status and document ID for one SP-API report",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
+    "name": "get_reports",
+    "description": "List SP-API reports by report type and processing status",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
+    "name": "get_product_fee_estimates",
+    "description": "Report-backed Amazon product fee estimate snapshots and changes",
+    "domain": "Finance",
+    "serverDomain": "finance",
+    "write": false
+  },
+  {
     "name": "get_financial_events",
-    "description": "Financial event fee breakdown and profitability views",
+    "description": "ASIN/order fees plus source-signed shipment and refund profitability fields",
     "domain": "Finance",
     "serverDomain": "finance",
     "write": false
@@ -887,7 +999,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_settlement_economics",
-    "description": "Settlement-finalized financial data",
+    "description": "Settlement-finalized economics with separate refund amounts",
     "domain": "Finance",
     "serverDomain": "finance",
     "write": false
@@ -908,10 +1020,17 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_aplus_status",
-    "description": "A+ Content status and associated ASINs",
+    "description": "A+ and Brand Story document coverage",
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": false
+  },
+  {
+    "name": "assign_brand_story_asins",
+    "description": "Preview or assign selected ASINs to one approved Brand Story with a full-set safety check",
+    "domain": "Catalog",
+    "serverDomain": "catalog",
+    "write": true
   },
   {
     "name": "get_variations",
@@ -943,14 +1062,42 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_catalog_cleanup",
-    "description": "Listings with catalog quality issues and source fields",
+    "description": "Listings with quality issues to fix",
+    "domain": "Catalog",
+    "serverDomain": "catalog",
+    "write": false
+  },
+  {
+    "name": "get_listing_content_changes",
+    "description": "Title, brand, image, and bullet changes between the two most recent catalog snapshots",
+    "domain": "Catalog",
+    "serverDomain": "catalog",
+    "write": false
+  },
+  {
+    "name": "get_product_type_definition",
+    "description": "Canonical Product Type Definition with required attributes and accepted values",
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": false
   },
   {
     "name": "create_listing",
-    "description": "Validate or submit a listing creation request",
+    "description": "Validate or submit a full catalog listing creation request",
+    "domain": "Catalog",
+    "serverDomain": "catalog",
+    "write": true
+  },
+  {
+    "name": "create_listing_offer",
+    "description": "Create a seller SKU and sales terms for an existing ASIN",
+    "domain": "Catalog",
+    "serverDomain": "catalog",
+    "write": true
+  },
+  {
+    "name": "convert_listings_to_fba",
+    "description": "Convert existing seller-fulfilled SKUs to Amazon fulfillment with eligibility checks and validation",
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": true
@@ -964,7 +1111,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "update_price",
-    "description": "Submit listing price updates through the Listings Items API",
+    "description": "Submit listing price and scheduled sale price updates through the Listings Items API",
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": true
@@ -975,13 +1122,6 @@ const domainTools: readonly CatalogTool[] = [
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": true
-  },
-  {
-    "name": "get_keyword_ranks",
-    "description": "Keyword rank positions, changes, and SQP volume views",
-    "domain": "Ranking",
-    "serverDomain": "ranking",
-    "write": false
   },
   {
     "name": "get_shipping_preview",
@@ -1010,6 +1150,111 @@ const domainTools: readonly CatalogTool[] = [
     "domain": "Fulfillment",
     "serverDomain": "fulfillment",
     "write": true
+  },
+  {
+    "name": "get_fba_inbound_plan",
+    "description": "Live inbound plan state, items, boxes, pallets, and shipments with both Amazon shipment identifiers",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": false
+  },
+  {
+    "name": "get_fba_inbound_options",
+    "description": "Amazon-generated packing, placement, transportation, delivery window, and appointment options with fees, quotes, and expirations",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": false
+  },
+  {
+    "name": "get_fba_inbound_operation_status",
+    "description": "Status and Amazon-reported problems for an asynchronous inbound operation",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": false
+  },
+  {
+    "name": "get_fba_inbound_documents",
+    "description": "Short-lived download links for inbound item labels, carton and pallet labels, bills of lading, and delivery challans",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": false
+  },
+  {
+    "name": "create_fba_inbound_plan",
+    "description": "Preview or create an Amazon inbound plan draft from a source address and items",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "prepare_fba_inbound_options",
+    "description": "Preview or run one Amazon option-generation step: packing, placement, transportation, delivery window, or appointment slots",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "confirm_fba_packing_option",
+    "description": "Preview or confirm one Amazon packing option",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "set_fba_packing_information",
+    "description": "Preview or submit carton contents, dimensions, and weights by packing group or shipment",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "confirm_fba_placement_option",
+    "description": "Preview or irreversibly confirm one Amazon placement option with its fees and shipment split",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "confirm_fba_delivery_window",
+    "description": "Preview or confirm one delivery window option for an own-carrier shipment",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "confirm_fba_transportation_options",
+    "description": "Preview or confirm one transportation option per shipment with quote and charge acknowledgement",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "schedule_fba_self_ship_appointment",
+    "description": "Preview or schedule an offered self-ship appointment slot in supported marketplaces",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "cancel_fba_self_ship_appointment",
+    "description": "Preview or cancel an API-scheduled self-ship appointment",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "update_fba_inbound_tracking",
+    "description": "Preview or submit small-parcel tracking IDs or freight PRO and BOL references",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
+  },
+  {
+    "name": "cancel_fba_inbound_plan",
+    "description": "Preview or cancel an inbound plan with current stage and void-state facts",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
   }
 ] as const
 
@@ -1020,7 +1265,7 @@ const utilityTools: readonly UtilityTool[] = [
   },
   {
     "name": "submit_conversation_feedback",
-    "description": "Submit a redacted structured product-quality report after the user explicitly asks agentcentral to receive feedback"
+    "description": "Submit a redacted structured product-quality report after the user explicitly asks Agent Central to receive feedback"
   },
   {
     "name": "get_account_info",
@@ -1028,7 +1273,11 @@ const utilityTools: readonly UtilityTool[] = [
   },
   {
     "name": "get_action_history",
-    "description": "Return tenant-wide write audit history when the active API key has action-history read permission"
+    "description": "Return account-wide write audit history when the active API key has action-history read permission"
+  },
+  {
+    "name": "get_report_document",
+    "description": "Download a bounded, non-restricted SP-API report document and return parsed JSON or TSV rows"
   }
 ] as const
 
@@ -1038,7 +1287,7 @@ const HOSTED_TOOL_COUNT = DOMAIN_SCOPED_TOOL_COUNT + UTILITY_TOOL_COUNT
 const LOCAL_STUB_TOOL_COUNT = HOSTED_TOOL_COUNT + 1
 
 const HOSTED_NOTICE =
-  `agentcentral exposes ${DOMAIN_SCOPED_TOOL_COUNT} domain-scoped Amazon MCP tools and ` +
+  `Agent Central exposes ${DOMAIN_SCOPED_TOOL_COUNT} domain-scoped Amazon MCP tools and ` +
   `${HOSTED_TOOL_COUNT} hosted production tools total across Amazon Ads, Seller Central, ` +
   `inventory, orders, catalog, ranking, finance, and fulfillment. The hosted server ` +
   `supports fast factual reads plus safe guarded writes with previews, guardrails, ` +
@@ -1051,6 +1300,7 @@ const HOSTED_NOTICE =
 const directApiToolNames = new Set<string>([
   "get_dsp_advertisers_live",
   "get_dsp_entities_live",
+  "get_advertising_invoices",
   "get_sp_entities_live",
   "get_sponsored_ads_entities_live",
   "get_sp_targeting_options",
@@ -1063,9 +1313,23 @@ const directApiToolNames = new Set<string>([
   "get_buybox_status",
   "get_competitive_pricing",
   "get_offer_listings",
-  "get_replenishment_offers",
+  "get_subscribe_and_save",
   "get_fba_eligibility",
-  "get_listing_restrictions"
+  "get_listing_restrictions",
+  "get_report",
+  "get_reports",
+  "get_payment_transactions",
+  "get_aplus_status",
+  "get_variations",
+  "get_product_reviews",
+  "get_review_trends",
+  "get_product_type_definition",
+  "get_shipping_preview",
+  "get_mcf_orders",
+  "get_fba_inbound_plan",
+  "get_fba_inbound_options",
+  "get_fba_inbound_operation_status",
+  "get_fba_inbound_documents"
 ])
 
 const readInputSchema = {
@@ -1187,7 +1451,7 @@ const tools: Tool[] = [
   {
     name: "agentcentral_setup",
     description:
-      "Returns connection details and setup links for the hosted agentcentral Amazon MCP server.",
+      "Returns connection details and setup links for the hosted Agent Central Amazon MCP server.",
     inputSchema: emptyInputSchema,
   },
 ]
@@ -1227,7 +1491,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     content: [
       {
         type: "text",
-        text: `Tool "${name}" is listed for hosted agentcentral discovery only.\n\n${HOSTED_NOTICE}`,
+        text: `Tool "${name}" is listed for hosted Agent Central discovery only.\n\n${HOSTED_NOTICE}`,
       },
     ],
     isError: false,
