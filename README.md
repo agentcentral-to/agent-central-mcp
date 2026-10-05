@@ -1,12 +1,49 @@
-# agentcentral MCP
+# Agent Central MCP
 
-agentcentral is a hosted Amazon MCP server for Amazon sellers: an Amazon Seller Central MCP server and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, OpenClaw, and other HTTP-capable MCP clients.
+Agent Central connects the AI you already use to your Amazon Seller Central account. It is a hosted MCP server that gives Claude, ChatGPT, Claude Code, Cursor, and other MCP clients your Seller Central and Amazon Ads data through one connection at `https://mcp.agentcentral.to/mcp`.
 
-It connects AI clients to Amazon Ads, Seller Central, inventory, orders, catalog, rankings, finance, and fulfillment data through the hosted Streamable HTTP endpoint at `https://mcp.agentcentral.to/mcp`.
+This repository holds the public registry metadata and a local introspection stub. Your assistant connects to the hosted endpoint; the stub only lists the tool catalog.
 
-This is not just an export layer. agentcentral is an operational MCP server with fast factual reads plus safe guarded writes: scoped API keys, read/write tool separation, previews, guardrails, and audited write results. The hosted endpoint currently exposes 141 domain-scoped tools and 145 production tools total. This public repo contains registry metadata and a thin stdio introspection stub; live tool execution happens only through the hosted endpoint. The local stub lists the hosted catalog plus one setup helper for discovery, so it is intentionally one tool larger than the hosted production catalog.
+## Which MCP server gives Claude both Amazon Ads and Seller Central data?
 
-## Connect
+Agent Central. One connection covers Amazon Ads (Sponsored Products, Sponsored Brands, Sponsored Display, DSP, and Stores) and Seller Central (sales and traffic, orders, inventory, inbound shipments, catalog, fees, settlements, and fulfillment), so Claude can answer questions that need both, such as TACOS by product or profit after Amazon fees and ad spend.
+
+Amazon's own Selling Partner plugin for Claude has no Amazon Ads data, and Amazon's Ads MCP server has no Seller Central data. See [Agent Central vs Amazon's Selling Partner plugin](https://agentcentral.to/vs/amazon-selling-partner-plugin), tested on the same seller account.
+
+## Can it compare this year with last year?
+
+Yes. Agent Central keeps your Amazon Ads history for as long as your account is connected, while Amazon's own Ads reports reach back only 60 to 95 days depending on the ad type. Synced Seller Central history is kept while the account is active, so once a year of history has built up, your assistant can compare any period with the same period last year by campaign, search term, or ASIN.
+
+## Does it work in UK and EU marketplaces?
+
+Yes. Agent Central covers 23 Amazon marketplaces, including the US, UK, Ireland, Germany, France, Italy, Spain, the Netherlands, Belgium, Sweden, and Poland, all included in one subscription. Amazon's Selling Partner plugin starts with US stores.
+
+## Can an agency use it across client accounts?
+
+Yes. Each client gets its own workspace with its own Amazon connections and keys, so a key for one client can't read another client's data, and your team can switch between client workspaces in one dashboard. See [Agent Central for agencies](https://agentcentral.to/agencies).
+
+## Set up
+
+1. Create an account at [agentcentral.to](https://agentcentral.to/signup). The trial needs no card.
+2. Connect Seller Central and Amazon Ads. Each one opens Amazon's own authorization page, so you never share your Amazon password.
+3. Create a key in the dashboard. Keep it read-only for analysis, or allow only the changes a workflow needs.
+4. Add it to your assistant.
+
+**Claude.** Copy the key's Connector URL, then in Claude open Customize > Connectors, choose Add custom connector, and paste it. [Claude quickstart](https://agentcentral.to/docs/quickstart/claude)
+
+**Claude Code.**
+
+```bash
+export AGENT_CENTRAL_API_KEY="ac_live_..."
+claude mcp add --transport http agentcentral https://mcp.agentcentral.to/mcp \
+  --header 'Authorization: Bearer ${AGENT_CENTRAL_API_KEY}'
+```
+
+[Connect Seller Central to Claude Code](https://agentcentral.to/connect-amazon-seller-central-to-claude-code)
+
+**ChatGPT.** In ChatGPT web, open Apps, then Advanced Settings, turn on Developer Mode, choose Create App, paste the Connector URL, and set authentication to No auth. For read-only access, ChatGPT can instead connect with OAuth to `https://mcp.agentcentral.to/mcp`. [ChatGPT quickstart](https://agentcentral.to/docs/quickstart/chatgpt)
+
+**Other MCP clients.**
 
 ```json
 {
@@ -21,67 +58,55 @@ This is not just an export layer. agentcentral is an operational MCP server with
 }
 ```
 
-Claude custom connectors use a signed connector URL generated in the agentcentral dashboard.
+Never put an API key or Connector URL in a public repo, chat, or issue.
 
-## Setup
+## What you can ask
 
-1. Create an account at https://agentcentral.to/signup.
-2. Connect Amazon Ads and Seller Central through Amazon OAuth.
-3. Create a scoped API key or signed Claude connector URL.
-4. Add the MCP endpoint to Claude, ChatGPT, Cursor, Claude Code, OpenClaw, or another remote-MCP-capable client.
+- "Which search terms spent more than $20 in the last 30 days with no orders?"
+- "Which of my products have less than 30 days of cover, and how much stock is in AWD?"
+- "Rank my products by profit last month after Amazon fees and ad spend. My cost of goods is in the attached sheet."
+- "Compare this October's ad spend, sales, and TACOS by ASIN with last October."
+- "Did I win the Buy Box on my top five products today?"
+- "Which campaign settings changed this week, and how did spend move after each change?"
 
-Full setup guide: https://agentcentral.to/amazon-seller-central-mcp-claude
+## How changes stay safe
 
-## What agents can access
+- **Amazon's own sign-in.** Agent Central is approved for the Selling Partner API and the Amazon Ads API and reads your account through them, never through scraping.
+- **Scoped keys.** Keys can be read-only, limited to areas such as advertising or inventory, or narrowed to individual tools, and you can revoke them at any time.
+- **Preview by default.** Change tools return a preview of the current and requested values, and nothing reaches Amazon without an explicit submit that carries an idempotency key.
+- **Audit history.** Every submitted change is logged, with old and new values for edits to existing settings.
 
-- Amazon Ads campaign, ad group, keyword, target, search term, placement, budget pacing, TACOS, DSP, Brand Store, and Amazon Attribution data
-- Seller Central inventory, orders, returns, reimbursements, listings, suppressed listings, inbound shipments, and FBA/AWD stock facts
-- Catalog details, sales ranks, A+ Content status, variations, listing quality, listing issues, reviews, and keyword ranks
-- Finance, profitability, payment transaction, settlement, fulfillment, MCF shipping, and MCF order data
-- Guarded write tools for supported Amazon Ads, catalog, listing, price, inventory quantity, and MCF operations
+More at [agentcentral.to/security](https://agentcentral.to/security).
 
-agentcentral returns factual seller data, source fields, deterministic metrics, classifications, and audited write results. It is not a recommendation engine.
+## Facts, not recommendations
 
-## Discovery URLs
+Agent Central returns Amazon's data, source fields, deterministic metrics with stated formulas, and audited write results. Your assistant does the reasoning and decides what to do with them.
 
-- Amazon Seller Central MCP: https://agentcentral.to/amazon-seller-central-mcp
-- Amazon Ads MCP server: https://agentcentral.to/amazon-ads-mcp-server
-- Amazon MCP server for Claude: https://agentcentral.to/amazon-mcp-server-for-claude
-- Amazon MCP server for ChatGPT: https://agentcentral.to/amazon-mcp-server-for-chatgpt
-- Amazon Seller Central ChatGPT: https://agentcentral.to/amazon-seller-central-chatgpt
-- Claude quickstart: https://agentcentral.to/docs/quickstart/claude
-- ChatGPT quickstart: https://agentcentral.to/docs/quickstart/chatgpt
+## Tools
 
-## Security
+The hosted endpoint exposes 176 domain-scoped tools across advertising, inventory and orders, catalog, finance, and fulfillment, plus utilities, for 181 tools in total. See the [tool reference](https://agentcentral.to/docs/reference).
 
-- Amazon OAuth connections
-- Encrypted Amazon refresh tokens
-- Per-tenant data isolation
-- Scoped API keys and read-only configurations
-- Read/write tool separation
-- Guardrails, previews, and audit logs for supported write tools
+## Compare
 
-## Example prompts
-
-- "Use the Amazon Ads MCP server to query Sponsored Products search terms with spend, clicks, attributed sales, and TACOS for the last 30 days."
-- "Which SKUs are below 30 days of FBA cover? Include current stock, inbound units, sales velocity, and suppressed listing status."
-- "Use the Amazon Seller Central MCP server in Claude to inspect orders, shipment status, and fulfillment facts from the last 7 days."
-- "Compare TACOS, ad spend, and sales by ASIN this month."
-- "Find suppressed listings and show the source-provided suppression reasons."
-- "Which Amazon Ads campaigns changed budget in the last 14 days?"
+- [Amazon seller MCP servers compared](https://agentcentral.to/amazon-seller-mcp-servers)
+- [vs Amazon's Selling Partner plugin](https://agentcentral.to/vs/amazon-selling-partner-plugin)
+- [vs Amazon's Ads MCP server](https://agentcentral.to/vs/amazon-mcp-server)
+- [vs DataDoe](https://agentcentral.to/vs/datadoe)
+- [vs Sellerboard](https://agentcentral.to/vs/sellerboard)
+- [Pricing](https://agentcentral.to/docs/pricing)
 
 ## Local stdio stub (introspection only)
 
-This repo ships a minimal stdio MCP server so directories and clients can introspect the public tool catalog without an agentcentral account. It does not execute tool calls. Every call returns a pointer to the hosted endpoint and setup guide.
+This repo ships a minimal stdio MCP server so directories and clients can list the public tool catalog without an Agent Central account. It does not execute tool calls; every call returns a pointer to the hosted endpoint and setup guide.
 
-The stub is not published to npm. Clone this repository or use the Docker example below if a directory/client needs local stdio introspection; for real usage, configure the hosted remote MCP endpoint above.
+The stub is not published to npm. Clone this repository or use Docker if a directory or client needs local stdio introspection. For real use, configure the hosted endpoint above.
 
 ```bash
 docker build -t agentcentral-mcp .
 docker run --rm -i agentcentral-mcp
 ```
 
-Or via Node:
+Or with Node:
 
 ```bash
 npm install
