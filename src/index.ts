@@ -1273,7 +1273,7 @@ const utilityTools: readonly UtilityTool[] = [
   },
   {
     "name": "get_action_history",
-    "description": "Return tenant-wide write audit history when the active API key has action-history read permission"
+    "description": "Return account-wide write audit history when the active API key has action-history read permission"
   },
   {
     "name": "get_report_document",
@@ -1491,7 +1491,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     content: [
       {
         type: "text",
-        text: `Tool "${name}" is listed for hosted agentcentral discovery only.\n\n${HOSTED_NOTICE}`,
+        text: `Tool "${name}" is listed for hosted Agent Central discovery only.\n\n${HOSTED_NOTICE}`,
       },
     ],
     isError: false,

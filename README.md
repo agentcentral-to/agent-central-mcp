@@ -73,7 +73,7 @@ Never put an API key or Connector URL in a public repo, chat, or issue.
 
 - **Amazon's own sign-in.** Agent Central is approved for the Selling Partner API and the Amazon Ads API and reads your account through them, never through scraping.
 - **Scoped keys.** Keys can be read-only, limited to areas such as advertising or inventory, or narrowed to individual tools, and you can revoke them at any time.
-- **Preview by default.** Change tools return a preview of the current and requested values, and nothing reaches Amazon without an explicit submit that carries an idempotency key.
+- **Preview by default.** Change tools return a preview of the requested change, including current values for edits, and nothing reaches Amazon without an explicit submit that carries an idempotency key.
 - **Audit history.** Every submitted change is logged, with old and new values for edits to existing settings.
 
 More at [agentcentral.to/security](https://agentcentral.to/security).
