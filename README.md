@@ -92,6 +92,7 @@ The hosted endpoint exposes 176 domain-scoped tools across advertising, inventor
 - [vs Amazon's Selling Partner plugin](https://agentcentral.to/vs/amazon-selling-partner-plugin)
 - [vs Amazon's Ads MCP server](https://agentcentral.to/vs/amazon-mcp-server)
 - [vs DataDoe](https://agentcentral.to/vs/datadoe)
+- [vs Helium 10 MCP](https://agentcentral.to/vs/helium-10)
 - [vs Sellerboard](https://agentcentral.to/vs/sellerboard)
 - [Pricing](https://agentcentral.to/docs/pricing)
 
