@@ -823,6 +823,13 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "refresh_listing_offer_observations",
+    "description": "Bounded asynchronous Amazon observation refresh for selected seller SKUs",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
     "name": "get_suppressed_listings",
     "description": "Suppressed and stranded listings",
     "domain": "Inventory",
