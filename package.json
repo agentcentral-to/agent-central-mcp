@@ -2,7 +2,7 @@
   "name": "agentcentral-mcp",
   "version": "1.0.4",
   "private": true,
-  "description": "Agent Central connects the AI you already use to your Amazon Seller Central account: a hosted Amazon Seller Central and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, and HTTP-capable MCP clients. This repository ships a local stdio introspection stub for the 181-tool hosted Streamable HTTP endpoint at https://mcp.agentcentral.to/mcp.",
+  "description": "Agent Central connects the AI you already use to your Amazon Seller Central account: a hosted Amazon Seller Central and Amazon Ads MCP server for Claude, ChatGPT, Cursor, Claude Code, and HTTP-capable MCP clients. This repository ships a local stdio introspection stub for the 182-tool hosted Streamable HTTP endpoint at https://mcp.agentcentral.to/mcp.",
   "license": "MIT",
   "type": "module",
   "bin": {

@@ -53,6 +53,6 @@ docker run --rm -i agentcentral-mcp
 
 ## What Agent Central exposes
 
-The hosted endpoint exposes 176 domain-scoped tools and 181 tools in total across Amazon Ads (Sponsored Products, Sponsored Brands, Sponsored Display, DSP, and Stores), Seller Central inventory and orders, catalog, finance, and fulfillment, in 23 Amazon marketplaces. Change tools preview by default and log every submitted change.
+The hosted endpoint exposes 177 domain-scoped tools and 182 tools in total across Amazon Ads (Sponsored Products, Sponsored Brands, Sponsored Display, DSP, and Stores), Seller Central inventory and orders, catalog, finance, and fulfillment, in 23 Amazon marketplaces. Change tools preview by default and log every submitted change.
 
 Agent Central returns factual seller data, source fields, deterministic metrics, classifications, and audited write results. It is not a recommendation engine.

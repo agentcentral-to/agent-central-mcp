@@ -25,9 +25,9 @@ const utilityToolCount = utilityToolMatches.length
 const hostedToolCount = domainToolCount + utilityToolCount
 const localStubToolCount = hostedToolCount + 1
 
-if (domainToolCount !== 176) fail(`expected 176 domain-scoped tools, found ${domainToolCount}`)
+if (domainToolCount !== 177) fail(`expected 177 domain-scoped tools, found ${domainToolCount}`)
 if (utilityToolCount !== 5) fail(`expected 5 utility tools, found ${utilityToolCount}`)
-if (hostedToolCount !== 181) fail(`expected 181 hosted tools, found ${hostedToolCount}`)
+if (hostedToolCount !== 182) fail(`expected 182 hosted tools, found ${hostedToolCount}`)
 
 for (const [path, text] of [["README.md", readme], ["llms-install.md", llms]]) {
   if (!text.includes(`${domainToolCount} domain-scoped`)) fail(`${path} is missing the ${domainToolCount} domain-scoped tool count`)

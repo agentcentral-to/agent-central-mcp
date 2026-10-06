@@ -84,7 +84,7 @@ Agent Central returns Amazon's data, source fields, deterministic metrics with s
 
 ## Tools
 
-The hosted endpoint exposes 176 domain-scoped tools across advertising, inventory and orders, catalog, finance, and fulfillment, plus utilities, for 181 tools in total. See the [tool reference](https://agentcentral.to/docs/reference).
+The hosted endpoint exposes 177 domain-scoped tools across advertising, inventory and orders, catalog, finance, and fulfillment, plus utilities, for 182 tools in total. See the [tool reference](https://agentcentral.to/docs/reference).
 
 ## Compare
 
