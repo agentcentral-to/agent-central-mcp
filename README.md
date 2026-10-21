@@ -1,5 +1,7 @@
 # Agent Central MCP
 
+[![AllMCPs Verified](https://allmcps.com/api/badge/agentcentral-to-agent-central-mcp)](https://allmcps.com/mcp/agentcentral-to-agent-central-mcp?verify=fc17792a-d834-42dc-90ed-d5cf4907bf44)
+
 Agent Central connects the AI you already use to your Amazon Seller Central account. It is a hosted MCP server that gives Claude, ChatGPT, Claude Code, Cursor, and other MCP clients your Seller Central and Amazon Ads data through one connection at `https://mcp.agentcentral.to/mcp`.
 
 This repository holds the public registry metadata and a local introspection stub. Your assistant connects to the hosted endpoint; the stub only lists the tool catalog.
