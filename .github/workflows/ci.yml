@@ -26,6 +26,9 @@ jobs:
       - name: Type-check + build
         run: npm run build
 
+      - name: Test read-only fixture example
+        run: npm run test:example
+
       - name: Smoke test stdio MCP introspection
         run: |
           ( echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}'
