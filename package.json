@@ -15,10 +15,12 @@
     "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', '755')\"",
     "start": "node dist/index.js",
     "check:metadata": "node scripts/check-metadata.mjs",
-    "ci": "npm run check:metadata && npm run build"
+    "test:example": "node examples/claude-code-readonly/test.mjs",
+    "report:example": "node examples/claude-code-readonly/report.mjs",
+    "ci": "npm run check:metadata && npm run build && npm run test:example"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.11.0"
+    "@modelcontextprotocol/sdk": "^1.32.2"
   },
   "devDependencies": {
     "@types/node": "^20.11.24",

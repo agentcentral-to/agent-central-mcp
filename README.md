@@ -4,7 +4,7 @@
 
 Agent Central connects the AI you already use to your Amazon Seller Central account. It is a hosted MCP server that gives Claude, ChatGPT, Claude Code, Cursor, and other MCP clients your Seller Central and Amazon Ads data through one connection at `https://mcp.agentcentral.to/mcp`.
 
-This repository holds the public registry metadata and a local introspection stub. Your assistant connects to the hosted endpoint; the stub only lists the tool catalog.
+This repository holds the public registry metadata and a local introspection stub. Your assistant connects to the hosted endpoint; the stub only lists the tool catalog. For a separate, fixture-only local Claude Code read example (not Agent Central and not a hosted tool), see [examples/claude-code-readonly](examples/claude-code-readonly/README.md).
 
 ## Which MCP server gives Claude both Amazon Ads and Seller Central data?
 
@@ -116,3 +116,7 @@ npm install
 npm run build
 node dist/index.js
 ```
+
+## Fixture-only Claude Code example
+
+[`examples/claude-code-readonly`](examples/claude-code-readonly/README.md) is a separate local stdio server with fixed synthetic sales, advertising, and inventory records. It is useful for trying a read-only MCP workflow without credentials or network access. It does not change the local catalog introspection stub, does not expose hosted Agent Central tools, and cannot access Amazon or customer data.
