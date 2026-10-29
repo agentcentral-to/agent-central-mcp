@@ -585,6 +585,27 @@ const domainTools: readonly CatalogTool[] = [
     "write": true
   },
   {
+    "name": "update_sp_campaign_settings",
+    "description": "Preview or rename SP campaigns and move them into or out of portfolios",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "create_portfolios",
+    "description": "Preview or create permanent Ads portfolios with optional budget caps",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "update_portfolios",
+    "description": "Preview or change portfolio names and budget caps",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
     "name": "create_sp_ad_groups",
     "description": "Preview or create Sponsored Products ad groups",
     "domain": "Ads",
