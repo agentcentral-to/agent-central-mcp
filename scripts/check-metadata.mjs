@@ -25,9 +25,23 @@ const utilityToolCount = utilityToolMatches.length
 const hostedToolCount = domainToolCount + utilityToolCount
 const localStubToolCount = hostedToolCount + 1
 
-if (domainToolCount !== 177) fail(`expected 177 domain-scoped tools, found ${domainToolCount}`)
+if (domainToolCount !== 180) fail(`expected 180 domain-scoped tools, found ${domainToolCount}`)
 if (utilityToolCount !== 5) fail(`expected 5 utility tools, found ${utilityToolCount}`)
-if (hostedToolCount !== 182) fail(`expected 182 hosted tools, found ${hostedToolCount}`)
+if (hostedToolCount !== 185) fail(`expected 185 hosted tools, found ${hostedToolCount}`)
+
+const domainCatalogBlock = source.match(/const domainTools:[\s\S]*?= (\[[\s\S]*?\]) as const/)?.[1]
+const domainCatalog = domainCatalogBlock ? JSON.parse(domainCatalogBlock) : []
+const catalogNames = domainCatalog.map((tool) => tool.name)
+if (new Set(catalogNames).size !== domainToolCount) fail("domain catalog contains duplicate or missing tool names")
+for (const name of ["update_sp_campaign_settings", "create_portfolios", "update_portfolios"]) {
+  const tool = domainCatalog.find((entry) => entry.name === name)
+  if (!tool || tool.serverDomain !== "ads" || tool.write !== true) {
+    fail(name + " must be present as an Ads guarded-write discovery entry")
+  }
+}
+if (!domainCatalog.find((tool) => tool.name === "create_portfolios")?.description.includes("permanent")) {
+  fail("create_portfolios must disclose that portfolios are permanent")
+}
 
 for (const [path, text] of [["README.md", readme], ["llms-install.md", llms]]) {
   if (!text.includes(`${domainToolCount} domain-scoped`)) fail(`${path} is missing the ${domainToolCount} domain-scoped tool count`)
