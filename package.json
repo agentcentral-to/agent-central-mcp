@@ -17,7 +17,8 @@
     "check:metadata": "node scripts/check-metadata.mjs",
     "test:example": "node examples/claude-code-readonly/test.mjs",
     "report:example": "node examples/claude-code-readonly/report.mjs",
-    "ci": "npm run check:metadata && npm run build && npm run test:example"
+    "test:gemini": "node --test scripts/gemini-extension.test.mjs",
+    "ci": "npm run check:metadata && npm run build && npm run test:example && npm run test:gemini"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.32.2"

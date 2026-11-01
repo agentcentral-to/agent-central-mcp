@@ -29,6 +29,9 @@ jobs:
       - name: Test read-only fixture example
         run: npm run test:example
 
+      - name: Test Gemini CLI extension and offline HTTP fixture
+        run: npm run test:gemini
+
       - name: Smoke test stdio MCP introspection
         run: |
           ( echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}'

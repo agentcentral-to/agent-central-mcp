@@ -1,0 +1,24 @@
+{
+  "name": "agent-central",
+  "version": "1.0.0",
+  "description": "Agent Central connects the AI you already use to your Amazon Seller Central account: advertising, inventory, orders, catalog, finance, and fulfillment through a hosted MCP server.",
+  "mcpServers": {
+    "agentcentral": {
+      "httpUrl": "https://mcp.agentcentral.to/mcp",
+      "headers": {
+        "Authorization": "Bearer ${AGENT_CENTRAL_API_KEY}"
+      },
+      "oauth": {
+        "enabled": false
+      }
+    }
+  },
+  "settings": [
+    {
+      "name": "Agent Central API key",
+      "description": "Enter a dedicated Agent Central API key, without the Bearer prefix. Start with a read-only key; access follows that key's marketplace and tool permissions.",
+      "envVar": "AGENT_CENTRAL_API_KEY",
+      "sensitive": true
+    }
+  ]
+}
