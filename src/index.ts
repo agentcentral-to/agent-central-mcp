@@ -39,6 +39,13 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "get_ad_entity_history",
+    "description": "Daily SP/SB bid and state observations and endpoint net changes",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": false
+  },
+  {
     "name": "get_ads_change_history",
     "description": "Timestamped Amazon Ads entity change events",
     "domain": "Ads",
