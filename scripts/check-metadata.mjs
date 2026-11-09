@@ -25,9 +25,9 @@ const utilityToolCount = utilityToolMatches.length
 const hostedToolCount = domainToolCount + utilityToolCount
 const localStubToolCount = hostedToolCount + 1
 
-if (domainToolCount !== 180) fail(`expected 180 domain-scoped tools, found ${domainToolCount}`)
+if (domainToolCount !== 181) fail(`expected 181 domain-scoped tools, found ${domainToolCount}`)
 if (utilityToolCount !== 5) fail(`expected 5 utility tools, found ${utilityToolCount}`)
-if (hostedToolCount !== 185) fail(`expected 185 hosted tools, found ${hostedToolCount}`)
+if (hostedToolCount !== 186) fail(`expected 186 hosted tools, found ${hostedToolCount}`)
 
 const domainCatalogBlock = source.match(/const domainTools:[\s\S]*?= (\[[\s\S]*?\]) as const/)?.[1]
 const domainCatalog = domainCatalogBlock ? JSON.parse(domainCatalogBlock) : []
