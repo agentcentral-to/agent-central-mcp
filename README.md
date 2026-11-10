@@ -43,6 +43,18 @@ claude mcp add --transport http agentcentral https://mcp.agentcentral.to/mcp \
 
 [Connect Seller Central to Claude Code](https://agentcentral.to/connect-amazon-seller-central-to-claude-code)
 
+**Gemini CLI.** Install the extension from this repository:
+
+```bash
+gemini extensions install https://github.com/agentcentral-to/agent-central-mcp --ref main --auto-update
+```
+
+The installer asks for your Agent Central API key as a sensitive setting. Enter the key without the `Bearer` prefix and start with a dedicated read-only key. The extension connects to the hosted endpoint, not the local introspection stub. Gemini CLI's normal tool confirmations are not bypassed; actual access follows the key's marketplace and tool permissions.
+
+To replace the stored key, use `gemini extensions config agent-central`. Restart Gemini CLI after installing or changing settings, then use `/mcp list` to check discovery. Ask it to confirm the marketplace and available data areas before analyzing seller data. This setup uses API-key authentication, not OAuth.
+
+Keep `--ref main` in the install command: an older GitHub release predates the extension. See [Gemini CLI distribution](#gemini-cli-distribution) before publishing a gallery listing.
+
 **ChatGPT.** In ChatGPT web, open Apps, then Advanced Settings, turn on Developer Mode, choose Create App, paste the Connector URL, and set authentication to No auth. For read-only access, ChatGPT can instead connect with OAuth to `https://mcp.agentcentral.to/mcp`. [ChatGPT quickstart](https://agentcentral.to/docs/quickstart/chatgpt)
 
 **Other MCP clients.**
@@ -116,6 +128,16 @@ npm install
 npm run build
 node dist/index.js
 ```
+
+## Gemini CLI distribution
+
+`gemini-extension.json` is a declarative connector for Gemini CLI. It contains no executable code, bundled prompts, policy overrides, API keys, or signed Connector URLs. The only requested setting is the API key, marked `sensitive` for Gemini CLI's secure setting storage. Install the extension only from a source you trust.
+
+The [Gemini CLI gallery](https://geminicli.com/extensions/browse/) discovers public repositories with a root manifest and the `gemini-cli-extension` GitHub topic. The topic must not be added until publication is approved. Gallery availability is not established by the manifest alone, and this is not a listing in the Gemini app or Google Search; those use Google's separate Connected Apps process.
+
+Before adding the gallery topic, publish an approved current GitHub release that includes the manifest. Gemini CLI's default GitHub installer can prefer the old release archive, which does not contain this extension. The explicit `--ref main` command above avoids that archive and tracks the latest source instead of freezing an old commit.
+
+`npm run test:gemini` checks the manifest's endpoint, sensitive setting, lack of automatic tool approval, and installation notes. It also exercises the header shape against a loopback-only synthetic HTTP MCP fixture. Gemini CLI 0.66.0 separately validated the manifest and installed a local fixture copy in an isolated home directory; `gemini mcp list` connected with a fake environment key. Secure-setting persistence was skipped in that fixture test. These checks do not sign into Gemini, store a real key, or certify a live Amazon connection.
 
 ## Fixture-only Claude Code example
 

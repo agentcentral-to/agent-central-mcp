@@ -34,6 +34,18 @@ Setup guides:
 - Claude Code: https://agentcentral.to/connect-amazon-seller-central-to-claude-code
 - ChatGPT: https://agentcentral.to/docs/quickstart/chatgpt
 
+## Gemini CLI extension
+
+Install the hosted connector, tracking the current source with automatic updates:
+
+```bash
+gemini extensions install https://github.com/agentcentral-to/agent-central-mcp --ref main --auto-update
+```
+
+Enter a dedicated read-only Agent Central API key in the installer's sensitive setting prompt, without the `Bearer` prefix. Do not put the key in chat or in this repository. The manifest declares the key setting and sends it as an Authorization header to the hosted Streamable HTTP endpoint. It does not use OAuth, launch the local stub, or bypass tool confirmations. A write-enabled key can expose account-changing tools, so use the narrowest key for the task.
+
+Restart Gemini CLI after installation and check `/mcp list`. To replace the key, use `gemini extensions config agent-central`, then restart. The `--ref main` argument avoids an older GitHub release that predates the extension. The Gemini CLI gallery is separate from Gemini app and Google Search distribution.
+
 ## Local setup: introspection only
 
 The local server in this repo is only for directory and client introspection. It lists the hosted public tool catalog plus one setup helper, but does not execute live Amazon data tools. Tool calls return a pointer to the hosted endpoint and setup guide.
