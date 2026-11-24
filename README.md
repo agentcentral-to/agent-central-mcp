@@ -43,7 +43,7 @@ claude mcp add --transport http agentcentral https://mcp.agentcentral.to/mcp \
 
 [Connect Seller Central to Claude Code](https://agentcentral.to/connect-amazon-seller-central-to-claude-code)
 
-**ChatGPT.** In ChatGPT web, open Apps, then Advanced Settings, turn on Developer Mode, choose Create App, paste the Connector URL, and set authentication to No auth. For read-only access, ChatGPT can instead connect with OAuth to `https://mcp.agentcentral.to/mcp`. [ChatGPT quickstart](https://agentcentral.to/docs/quickstart/chatgpt)
+**ChatGPT.** The Agent Central plugin needs no key. In ChatGPT, open Plugins, search for Agent Central, and choose Install plugin ([plugin page](https://chatgpt.com/plugins/plugin_asdk_app_6abe9e5376e48191b10f20201636ca62)). When ChatGPT asks you to connect, sign in to Agent Central or create an account. In the same window, connect Seller Central, Amazon Ads, or both, and allow read-only access. The plugin is view-only. For changes or live Amazon data, add the key's Connector URL in ChatGPT on the web instead: open Plugins, choose +, then Add custom MCP server, and set authentication to No auth. OpenAI allows write tools there on Business, Enterprise, and Edu workspaces. [ChatGPT quickstart](https://agentcentral.to/docs/quickstart/chatgpt)
 
 **Other MCP clients.**
 
@@ -86,7 +86,7 @@ Agent Central returns Amazon's data, source fields, deterministic metrics with s
 
 ## Tools
 
-The hosted endpoint exposes 181 domain-scoped tools across advertising, inventory and orders, catalog, finance, and fulfillment, plus utilities, for 186 tools in total. See the [tool reference](https://agentcentral.to/docs/reference).
+The hosted endpoint has 188 domain-scoped tools across advertising, inventory and orders, catalog, finance, and fulfillment, plus utilities, for 193 tools in total. Key scope, marketplace and rollout settings decide which ones a connection sees. See the [tool reference](https://agentcentral.to/docs/reference).
 
 ## Compare
 

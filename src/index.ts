@@ -110,7 +110,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_sponsored_ads_report",
-    "description": "Consolidated SP/SB/SD retained report views",
+    "description": "Consolidated SP/SB/SD retained report views; isolated gated Review Requests daily delivery metrics",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -166,7 +166,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_tacos",
-    "description": "Total ad cost of sales per ASIN",
+    "description": "Per-ASIN TACOS from Sponsored Products and Display spend, or account TACOS across Sponsored Products, Brands, and Display",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -215,14 +215,14 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "diagnose_performance",
-    "description": "SP/SB/SD root cause analysis between date ranges",
+    "description": "Observed Sponsored Products, Brands, or Display performance changes between two periods",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
   },
   {
     "name": "get_sp_entities_live",
-    "description": "Live Sponsored Products entity state from Amazon",
+    "description": "Live Sponsored Products entity and portfolio state from Amazon",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -247,6 +247,41 @@ const domainTools: readonly CatalogTool[] = [
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
+  },
+  {
+    "name": "create_review_request_campaign",
+    "description": "Create a paused US beta Review Requests campaign workflow",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "update_review_request_campaign_state",
+    "description": "Pause or resume a US beta Review Requests campaign",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "update_review_request_campaign_budget",
+    "description": "Change a US beta Review Requests daily budget",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "update_review_request_target_bid",
+    "description": "Change a US beta Review Requests target maximum bid",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
+  },
+  {
+    "name": "update_review_request_ad_group_bid",
+    "description": "Change a US beta Review Requests ad group default bid",
+    "domain": "Ads",
+    "serverDomain": "ads",
+    "write": true
   },
   {
     "name": "create_sb_campaigns",
@@ -628,7 +663,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "update_sp_ad_entities",
-    "description": "Preview or update/archive Sponsored Products ad groups and product ads",
+    "description": "Preview or update, rename, or archive Sponsored Products ad groups and product ads",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": true
@@ -747,7 +782,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_promotion_performance",
-    "description": "Coupon clips, redemptions, and budget, plus Best Deal and Lightning Deal performance with Amazon-reported status",
+    "description": "Cumulative coupon/deal performance plus published promotion definitions, schedules, discounts, and item-selection coverage",
     "domain": "Ads",
     "serverDomain": "ads",
     "write": false
@@ -886,6 +921,13 @@ const domainTools: readonly CatalogTool[] = [
     "write": false
   },
   {
+    "name": "get_order_review_availability",
+    "description": "Stored Request a Review observations and day/ASIN scan coverage",
+    "domain": "Inventory",
+    "serverDomain": "inventory",
+    "write": false
+  },
+  {
     "name": "get_order_details",
     "description": "Per-order line items",
     "domain": "Inventory",
@@ -985,7 +1027,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "create_report",
-    "description": "Create a generic non-restricted Seller Central report",
+    "description": "Create a supported marketplace-specific listings, sales/traffic or Brand Analytics report",
     "domain": "Inventory",
     "serverDomain": "inventory",
     "write": true
@@ -1006,7 +1048,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_product_fee_estimates",
-    "description": "Report-backed Amazon product fee estimate snapshots and changes",
+    "description": "Report-backed snapshots/changes plus one-SKU live candidate-price estimates",
     "domain": "Finance",
     "serverDomain": "finance",
     "write": false
@@ -1027,7 +1069,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_payment_transactions",
-    "description": "Live Amazon Payments transaction rows and summaries",
+    "description": "Live payment transactions, payout groups, balances and financial summaries",
     "domain": "Finance",
     "serverDomain": "finance",
     "write": false
@@ -1097,7 +1139,7 @@ const domainTools: readonly CatalogTool[] = [
   },
   {
     "name": "get_catalog_cleanup",
-    "description": "Listings with quality issues to fix",
+    "description": "Stored listing errors, warnings, and content or fulfillment gaps",
     "domain": "Catalog",
     "serverDomain": "catalog",
     "write": false
@@ -1171,6 +1213,13 @@ const domainTools: readonly CatalogTool[] = [
     "domain": "Fulfillment",
     "serverDomain": "fulfillment",
     "write": false
+  },
+  {
+    "name": "send_review_feedback_solicitation",
+    "description": "Preview or explicitly send Amazon’s combined review and seller-feedback invitation for selected orders",
+    "domain": "Fulfillment",
+    "serverDomain": "fulfillment",
+    "write": true
   },
   {
     "name": "create_mcf_order",
@@ -1296,7 +1345,7 @@ const domainTools: readonly CatalogTool[] = [
 const utilityTools: readonly UtilityTool[] = [
   {
     "name": "get_account_data_tour",
-    "description": "Return a first-run account data tour with trust preflight, business pulse, spotlight products, neutral cross-domain signals, and evidence handles"
+    "description": "Return stored seller sales, advertising, inventory, period comparisons, freshness, and coverage summaries"
   },
   {
     "name": "submit_conversation_feedback",
@@ -1304,7 +1353,7 @@ const utilityTools: readonly UtilityTool[] = [
   },
   {
     "name": "get_account_info",
-    "description": "Return the marketplace scope, connection status, and tool availability for the active API key"
+    "description": "Return marketplace scope, connection status, data coverage, and tool availability for the active connection"
   },
   {
     "name": "get_action_history",
@@ -1312,7 +1361,7 @@ const utilityTools: readonly UtilityTool[] = [
   },
   {
     "name": "get_report_document",
-    "description": "Download a bounded, non-restricted SP-API report document and return parsed JSON or TSV rows"
+    "description": "Download supported marketplace-specific listings, sales/traffic and Brand Analytics documents after parent and document-specification verification"
   }
 ] as const
 
@@ -1344,6 +1393,7 @@ const directApiToolNames = new Set<string>([
   "get_budget_recommendations",
   "get_ad_eligibility",
   "get_audience_segments",
+  "refresh_listing_offer_observations",
   "get_current_rank",
   "get_buybox_status",
   "get_competitive_pricing",
