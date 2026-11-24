@@ -24,7 +24,9 @@ To get an API key:
 1. Sign up at https://agentcentral.to/signup.
 2. Connect Seller Central and Amazon Ads through Amazon's own authorization pages.
 3. Create a scoped API key in the Agent Central dashboard. Keep it read-only unless the workflow needs changes.
-4. Add the endpoint and Authorization header to Claude Code, Cursor, OpenClaw, Cline, or another HTTP-capable MCP client. Claude custom connectors and ChatGPT apps use the key's Connector URL instead.
+4. Add the endpoint and Authorization header to Claude Code, Cursor, OpenClaw, Cline, or another HTTP-capable MCP client. Claude custom connectors use the key's Connector URL instead.
+
+In ChatGPT, install the Agent Central plugin from the plugin directory instead: https://chatgpt.com/plugins/plugin_asdk_app_6abe9e5376e48191b10f20201636ca62. It signs in with OAuth, needs no API key and is view-only. For write tools or live Amazon data in ChatGPT, add the key's Connector URL as a custom MCP server with authentication set to No auth.
 
 Never ask the user to paste an API key or Connector URL into a public place.
 
@@ -53,6 +55,6 @@ docker run --rm -i agentcentral-mcp
 
 ## What Agent Central exposes
 
-The hosted endpoint exposes 181 domain-scoped tools and 186 tools in total across Amazon Ads (Sponsored Products, Sponsored Brands, Sponsored Display, DSP, and Stores), Seller Central inventory and orders, catalog, finance, and fulfillment, in 23 Amazon marketplaces. Change tools preview by default and log every submitted change.
+The hosted endpoint has 188 domain-scoped tools and 193 tools in total across Amazon Ads (Sponsored Products, Sponsored Brands, Sponsored Display, DSP, and Stores), Seller Central inventory and orders, catalog, finance, and fulfillment, in 23 Amazon marketplaces. Key scope, marketplace and rollout settings decide which ones a connection sees. Change tools preview by default and log every submitted change.
 
 Agent Central returns factual seller data, source fields, deterministic metrics, classifications, and audited write results. It is not a recommendation engine.
